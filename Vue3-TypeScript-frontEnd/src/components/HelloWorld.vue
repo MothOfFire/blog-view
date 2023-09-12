@@ -1,39 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+/**
+ * 通过组合式 API（CompositionAPI），我们可以使用导入的 API 函数来描述组件逻辑
+ * <script setup> 中的导入和顶层变量/函数都能够在模板中直接使用。
+*/
+import { Search } from '@element-plus/icons-vue';
+import { watch, ref } from 'vue';
+const value = ref<string>('');
+const value1 = ref<string>('');
+watch(value, () => {
+  console.log(value.value);
+});
+watch(value1, () => {
+  console.log(value1.value);
+});
+function hello() {
+  alert('Hello Vue3,this use compositionAPI');
+}
 
-defineProps<{ msg: string }>()
-
-const count = ref(0)
 </script>
 
 <template>
-  <!-- <h1>Hello World</h1> -->
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <a-space direction="vertical">
+    <a-input v-model:value="value" placeholder="Basic usage" />
+    <a-input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
+  </a-space>
+  <el-button type="primary" :icon="Search" circle @click="hello" class="btn" />
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
+  .btn {
+    width: 50px;
+    height: 50px;
+  }
 </style>
