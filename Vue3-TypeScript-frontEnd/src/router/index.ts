@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Home from "../views/Home.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -8,11 +9,19 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             title: '测试Hello'
         }
+    },
+    {
+        name: 'home',
+        path: '/',
+        component: Home,
+        meta: {
+            title: '首页'
+        }
     }
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
 
